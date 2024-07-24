@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Accapt.Views.LoginPage
+namespace AccaptFullyVersion.App.Views
 {
     /// <summary>
-    /// Interaction logic for Login_Front.xaml
+    /// Interaction logic for RegisterPage.xaml
     /// </summary>
-    public partial class Login_Front : Window
+    public partial class RegisterPage : Window
     {
-        public Login_Front()
+        public RegisterPage(MainWindow mainWindow)
         {
             InitializeComponent();
         }
