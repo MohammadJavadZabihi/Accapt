@@ -24,6 +24,10 @@ namespace Accapt.DataLayer.Entities
         public DateTime RegisterDate { get; set; }
 
         [Required]
+        [MaxLength(500)]
+        public string Email { get; set; }
+
+        [Required]
         [MaxLength(200)]
         public string VerifyCode { get; set; }
 

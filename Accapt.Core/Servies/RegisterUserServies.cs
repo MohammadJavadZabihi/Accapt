@@ -17,9 +17,12 @@ namespace Accapt.Core.Servies
     public class RegisterUserServies : IRegisterUserServies
     {
         private readonly AccaptFContext _context;
-        public RegisterUserServies(AccaptFContext context)
+        private readonly IFindUserServies _findUserServies;
+        public RegisterUserServies(AccaptFContext context,
+               IFindUserServies findUserServies)
         {
             _context = context ?? throw new ArgumentException(nameof(context));
+            _findUserServies = findUserServies ?? throw new ArgumentException(nameof(findUserServies));
         }
 
         public async Task<ReturniStatuceDTO> RegisterUser(RegisterUserDTO newuser)
@@ -32,10 +35,27 @@ namespace Accapt.Core.Servies
                     Data = null
                 };
 
+            if (await _findUserServies.IsExsistUserName(newuser.UserName))
+                return new ReturniStatuceDTO()
+                {
+                    Data = null,
+                    ISuucess = false,
+                    Message = "This UserName is Exsist"
+                };
+
+            if (await _findUserServies.IsExsistEmail(newuser.UserName))
+                return new ReturniStatuceDTO()
+                {
+                    Data = null,
+                    ISuucess = false,
+                    Message = "This Email is Exsist"
+                };
+
+
             var guiId = NameGenerator.GenerateUniqCode();
 
             bool existGUID = await _context.Users.AnyAsync(u => u.Id == guiId);
-            while(existGUID)
+            while (existGUID)
             {
                 guiId = NameGenerator.GenerateUniqCode();
             }
@@ -51,7 +71,8 @@ namespace Accapt.Core.Servies
                 RegisterDate = currentDat,
                 Role = 0,
                 VerifyCode = CodeGeneratorForTwoFactory.GenerateSecureRandomNumber().ToString(),
-                ExpireAccessDate = currentDat.AddYears(1)
+                ExpireAccessDate = currentDat.AddYears(1),
+                Email = newuser.Email
             };
 
             await _context.Users.AddAsync(user);

@@ -21,6 +21,7 @@ builder.Services.AddDbContext<AccaptFContext>(options =>
 builder.Services.AddTransient<ICallApiServies, CallApi>();
 builder.Services.AddTransient<IRegisterUserServies, RegisterUserServies>();
 builder.Services.AddTransient<IApiCallServies, ApiCallServies>();
+builder.Services.AddTransient<IFindUserServies, FindeUserServies>();
 
 #endregion
 

@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace Accapt.Core.DTOs
 {
-    public class RegisterUserDTO
+    public class LoginUserDTO
     {
-        public string Name { get; set; } = string.Empty;
-        public string Family { get; set; } = string.Empty;
-        public string UserName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string RePassword { get; set; } = string.Empty;
     }
 }
