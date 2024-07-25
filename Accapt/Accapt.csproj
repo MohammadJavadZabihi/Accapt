@@ -15,6 +15,7 @@
     <None Remove="ImageResurce\hmic.png" />
     <None Remove="ImageResurce\LoginIcon.png" />
     <None Remove="ImageResurce\Login_and_Register_Icon.png" />
+    <None Remove="ImageResurce\Profile.jpg" />
     <None Remove="ImageResurce\VisualStudio.png" />
     <None Remove="ImageResurce\VSCode.png" />
   </ItemGroup>
@@ -26,6 +27,7 @@
     <Resource Include="ImageResurce\hmic.png" />
     <Resource Include="ImageResurce\LoginIcon.png" />
     <Resource Include="ImageResurce\Login_and_Register_Icon.png" />
+    <Resource Include="ImageResurce\Profile.jpg" />
     <Resource Include="ImageResurce\VisualStudio.png" />
     <Resource Include="ImageResurce\VSCode.png" />
   </ItemGroup>
