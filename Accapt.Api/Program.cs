@@ -1,9 +1,6 @@
 using Accapt.Core.Servies;
 using Accapt.Core.Servies.InterFace;
 using Accapt.DataLayer.Context;
-using ApiRequest.Net.CallApi;
-using ApiRequest.Net.Servies;
-using ApiRequest.Net.Servies.InterFace;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,10 +15,11 @@ builder.Services.AddDbContext<AccaptFContext>(options =>
 
 #region IOC
 
-builder.Services.AddTransient<ICallApiServies, CallApi>();
+builder.Services.AddTransient<ICallApiServies, CallApiServies>();
 builder.Services.AddTransient<IRegisterUserServies, RegisterUserServies>();
 builder.Services.AddTransient<IApiCallServies, ApiCallServies>();
 builder.Services.AddTransient<IFindUserServies, FindeUserServies>();
+builder.Services.AddTransient<ILoginUserServies, LoginUserServies>();
 
 #endregion
 

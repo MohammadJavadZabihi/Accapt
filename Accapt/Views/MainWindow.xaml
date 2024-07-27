@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AccaptFullyVersion.App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1080" Visibility="Visible" WindowStartupLocation="CenterScreen" Background="Transparent" MinHeight="600" MinWidth="800">
+        Title="MainWindow" Height="800" Width="1080" Visibility="Hidden" WindowStartupLocation="CenterScreen" Background="Transparent" MinHeight="600" MinWidth="800">
     <Grid>
         <Border Background="#FFFFFF" CornerRadius="22">
             <Grid>

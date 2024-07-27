@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AccaptFullyVersion.App.Views"
         mc:Ignorable="d"
-        Height="480" Width="800" WindowStartupLocation="CenterScreen"
+        Height="650" Width="800" WindowStartupLocation="CenterScreen"
         WindowStyle="None" Background="Transparent" AllowsTransparency="True">
     <Grid>
         <Border CornerRadius="22" Background="#ffffff">
@@ -23,13 +23,16 @@
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 30 0">
                         <TextBlock Text="....حساب کاری خود را بسازید" Style="{StaticResource LRTexBlock}" Width="273" FontSize="22"/>
 
-                        <TextBox x:Name="txtUserName" Margin="0 10 0 0" Style="{StaticResource LRTextBox}"  Template="{StaticResource LRUserTextBox}" Text="نام کاربری"/>
+                        <TextBox x:Name="txtName" Margin="0 10 0 0" Style="{StaticResource LRTextBox}"  Template="{StaticResource LRUserTextBox}" Text="نام"/>
+                        <TextBox x:Name="txtFamily" Margin="0 20 0 0" Style="{StaticResource LRTextBox}"  Template="{StaticResource LRUserTextBox}" Text="نام خوانوادگی"/>
+                        <TextBox x:Name="txtUserName" Margin="0 20 0 0" Style="{StaticResource LRTextBox}"  Template="{StaticResource LRUserTextBox}" Text="نام کاربری"/>
                         <TextBox x:Name="txtEmail" Margin="0 20 0 0" Style="{StaticResource LRTextBox}"  Template="{StaticResource LRUserTextBox}" Text="ایمیل"/>
+                        <TextBox x:Name="txtPhoneNumber" Margin="0 20 0 0" Style="{StaticResource LRTextBox}"  Template="{StaticResource LRUserTextBox}" Text="شماره همراه"/>
 
                         <PasswordBox x:Name="txtPassword" Margin="0 20 0 0" Style="{StaticResource LRPasswordBox}" Template="{StaticResource passwordbox}"/>
                         <PasswordBox x:Name="txtRePassword" Margin="0 20 0 0" Style="{StaticResource LRPasswordBox}" Template="{StaticResource passwordbox}"/>
 
-                        <Button x:Name="btnRegister" Style="{StaticResource LRButton}" Margin="0 20 0 0" Content="ثبت نام" Height="33">
+                        <Button x:Name="btnRegister" Style="{StaticResource LRButton}" Margin="0 20 0 0" Content="ثبت نام" Height="33" Click="btnRegister_Click">
                             <Button.Background>
                                 <LinearGradientBrush>
                                     <LinearGradientBrush.GradientStops>
@@ -42,7 +45,7 @@
 
                         <TextBlock Text="_______________ یا _________________" Style="{StaticResource LRTexBlock}" FontSize="20" FontWeight="Normal" Margin="0 20 0 0" Width="283"/>
 
-                        <Button x:Name="btnSingin" Style="{StaticResource SingUpdButton}" Margin="0 20 0 0" Content="حساب کاربری دارید؟"/>
+                        <Button x:Name="btnSingin" Style="{StaticResource SingUpdButton}" Margin="0 20 0 0" Content="حساب کاربری دارید؟" Click="btnSingin_Click"/>
                     </StackPanel>
                 </Grid>
 

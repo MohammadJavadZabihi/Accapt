@@ -1,4 +1,6 @@
-﻿using AccaptFullyVersion.App.Views;
+﻿using Accapt.Core.Servies;
+using Accapt.Core.Servies.InterFace;
+using AccaptFullyVersion.App.Views;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,14 +20,16 @@ namespace AccaptFullyVersion.App
     public partial class MainWindow : Window
     {
         public int formId = -1;
+        private readonly ApiCallServies _callApiServies;
         public MainWindow()
         {
             InitializeComponent();
-            //if (formId == -1)
-            //{
-            //    LoginPage loginPage = new LoginPage(this);
-            //    loginPage.ShowDialog();
-            //}
+            _callApiServies = new ApiCallServies();
+            if (formId == -1)
+            {
+                LoginPage loginPage = new LoginPage(this);
+                loginPage.ShowDialog();
+            }
         }
 
         private void btnAccountDetails_Click(object sender, RoutedEventArgs e)

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Accapt.Core.Servies.InterFace
 {
-    public interface ILoginUserServies
+    public interface IApiCallServies
     {
-        Task<ReturniStatuceDTO> LoginUser(LoginUserDTO user);
+        Task<ApiResponse<T>> SendRequest<T>(HttpMethod method, string url, object? data, string jwt);
     }
 }

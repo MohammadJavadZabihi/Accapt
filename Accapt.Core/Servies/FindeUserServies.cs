@@ -1,5 +1,6 @@
 ﻿using Accapt.Core.Servies.InterFace;
 using Accapt.DataLayer.Context;
+using Accapt.DataLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,11 @@ namespace Accapt.Core.Servies
             _context = context ?? throw new ArgumentException(nameof(context));
         }
 
+        public async Task<Users?> FindUserByUserName(string userName)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+        }
+
         public async Task<bool> IsExsistEmail(string email)
         {
             return await _context.Users.AnyAsync(u => u.Email == email);
@@ -24,7 +30,7 @@ namespace Accapt.Core.Servies
 
         public async Task<bool> IsExsistUserName(string userName)
         {
-            return await _context.Users.AnyAsync(u =>> u.UserName == userName);
+            return await _context.Users.AnyAsync(u => u.UserName == userName);
         }
     }
 }

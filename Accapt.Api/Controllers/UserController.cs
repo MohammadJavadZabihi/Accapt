@@ -10,10 +10,15 @@ namespace Accapt.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IRegisterUserServies _registerServies;
-        public UserController(IRegisterUserServies registerUserServies)
+        private readonly ILoginUserServies _loginUserServies;
+        public UserController(IRegisterUserServies registerUserServies,
+            ILoginUserServies loginUserServies)
         {
             _registerServies = registerUserServies ?? throw new ArgumentException(nameof(registerUserServies));
+            _loginUserServies = loginUserServies ?? throw new AbandonedMutexException(nameof(loginUserServies));
         }
+
+        #region Register User
 
         [HttpPost("RGU(V1)")]
         public async Task<IActionResult> RegisterUser(RegisterUserDTO register)
@@ -21,17 +26,36 @@ namespace Accapt.Api.Controllers
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if(register == null)
-                return BadRequest("Null Exeption");
-
             var resgiterUser = await _registerServies.RegisterUser(register);
+
+            if (register == null)
+                return BadRequest(resgiterUser.Message);
 
             if (!resgiterUser.ISuucess)
                 return BadRequest(resgiterUser.Message);
 
-
-            return Ok(resgiterUser.Data);
+            return Ok(resgiterUser);
 
         }
+
+        #endregion
+
+        #region Login User
+
+        [HttpPost("LGU(V1)")]
+        public async Task<IActionResult> Loginuser(LoginUserDTO loginUser)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var loginUserStatuce = await _loginUserServies.LoginUser(loginUser);
+
+            if (!loginUserStatuce.ISuucess)
+                return BadRequest(loginUserStatuce.Message);
+
+            return Ok(loginUserStatuce.Message);
+        }
+
+        #endregion
     }
 }

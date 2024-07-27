@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+using Accapt.Core.Servies;
+using Accapt.Core.Servies.InterFace;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +22,25 @@ namespace AccaptFullyVersion.App.Views
     /// </summary>
     public partial class LoginPage : Window
     {
-        public LoginPage()
+        private readonly MainWindow _mainWindow;
+        private readonly ApiCallServies _callApiServies;
+        public LoginPage(MainWindow mainWindow)
         {
             InitializeComponent();
+            _mainWindow = mainWindow;
+            _callApiServies = new ApiCallServies();
         }
 
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void btnSingUp_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Hidden;
+            RegisterPage registerPage = new RegisterPage(_mainWindow);
+            registerPage.ShowDialog();
+        }
     }
 }

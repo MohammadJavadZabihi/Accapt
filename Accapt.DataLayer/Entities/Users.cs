@@ -18,6 +18,10 @@ namespace Accapt.DataLayer.Entities
 
         [Required]
         [MaxLength(200)]
+        public string Password { get; set; }
+
+        [Required]
+        [MaxLength(200)]
         public string RealFullName { get; set; }
 
         [Required]
