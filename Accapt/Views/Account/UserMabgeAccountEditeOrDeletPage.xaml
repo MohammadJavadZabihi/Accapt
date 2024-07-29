@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Accapt.Views.Account"
         mc:Ignorable="d"
-        Title="ویرایش حساب کاربری" Height="450" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="ویرایش حساب کاربری" Height="400" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -19,9 +19,9 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text=": نام کاربری" Style="{StaticResource LRTexBlock}" Margin="0 10 20 0" FontSize="25"/>
+                    <TextBlock x:Name="lbl" Text=": نام کاربری" Style="{StaticResource LRTexBlock}" Margin="0 10 20 0" FontSize="25"/>
 
-                    <TextBox x:Name="txtUserName" Margin="43,10,43,17" Grid.Row="1" FontSize="18" Template="{StaticResource LRUserTextBox}" Style="{StaticResource LRTextBox}"/>
+                    <TextBox x:Name="txt" Margin="43,10,43,17" Grid.Row="1" FontSize="18" Template="{StaticResource LRUserTextBox}" Style="{StaticResource LRTextBox}"/>
                 </Grid>
             </Border>
         </StackPanel>

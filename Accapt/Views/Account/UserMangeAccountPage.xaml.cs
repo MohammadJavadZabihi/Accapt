@@ -2,6 +2,7 @@
 using Accapt.WpfServies;
 using AccaptFullyVersion.App;
 using ApiRequest.Net.CallApi;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace Accapt.Views.Account
     {
         private readonly CallApi _callApi;
 
+        public GetSingleUserDTO data;
         public UserMangeAccount()
         {
             InitializeComponent();
@@ -42,7 +44,7 @@ namespace Accapt.Views.Account
 
             if (user.IsSuccess)
             {
-                var data = user.Data;
+                data = user.Data;
                 lblWelcomUser.Text = $"خوش آمدید {data.UserName}";
                 lblEmail.Text = data.Email;
                 lblFullName.Text = data.RealFullName;
@@ -63,7 +65,32 @@ namespace Accapt.Views.Account
         private void btnEditeUserName_Click(object sender, RoutedEventArgs e)
         {
             UserMabgeAccountEditeOrDeletPage page = new UserMabgeAccountEditeOrDeletPage(_callApi);
-            page.SetProperty(lblUserName.Text);
+            page.SetProperty(UserSession.Instance.Username);
+            page.Id = 1;
+            page.ShowDialog();
+        }
+
+        private void btnEditeEmail_Click(object sender, RoutedEventArgs e)
+        {
+            UserMabgeAccountEditeOrDeletPage page = new UserMabgeAccountEditeOrDeletPage(_callApi);
+            page.SetProperty(data.Email);
+            page.Id = 2;
+            page.ShowDialog();
+        }
+
+        private void btnEditePhoneNumber_Click(object sender, RoutedEventArgs e)
+        {
+            UserMabgeAccountEditeOrDeletPage page = new UserMabgeAccountEditeOrDeletPage(_callApi);
+            page.SetProperty(data.PhoneNumber);
+            page.Id = 3;
+            page.ShowDialog();
+        }
+
+        private void btnEditeFullName_Click(object sender, RoutedEventArgs e)
+        {
+            UserMabgeAccountEditeOrDeletPage page = new UserMabgeAccountEditeOrDeletPage(_callApi);
+            page.SetProperty(data.RealFullName);
+            page.Id = 4;
             page.ShowDialog();
         }
     }

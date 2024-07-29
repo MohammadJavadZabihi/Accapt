@@ -62,7 +62,7 @@
 
                                 <TextBlock Text=": ایمیل" Style="{StaticResource LRTexBlock}" Margin="0 10 20 0" FontSize="25"/>
 
-                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}" x:Name="btnEditeEmail">
+                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}" x:Name="btnEditeEmail" Click="btnEditeEmail_Click">
                                     <Image Source="/ImageResurce/EditeIcon.png" />
                                 </Button>
 
@@ -110,7 +110,7 @@
 
                                 <TextBlock Text=": نام و نام خوانوادگی" Style="{StaticResource LRTexBlock}" Margin="0 10 20 0" FontSize="22"/>
 
-                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}" x:Name="btnEditeFullName">
+                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}" x:Name="btnEditeFullName" Click="btnEditeFullName_Click">
                                     <Image Source="/ImageResurce/EditeIcon.png" />
                                 </Button>
 
@@ -131,7 +131,7 @@
 
                                 <TextBlock Text=": تلفن همراه" Style="{StaticResource LRTexBlock}" Margin="0 10 20 0" FontSize="25"/>
 
-                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}" x:Name="btnEditePhoneNumber">
+                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}" x:Name="btnEditePhoneNumber" Click="btnEditePhoneNumber_Click">
                                     <Image Source="/ImageResurce/EditeIcon.png" />
                                 </Button>
 
