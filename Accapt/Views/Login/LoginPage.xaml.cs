@@ -1,6 +1,11 @@
 ﻿
+using Accapt.Core.DTOs;
 using Accapt.Core.Servies;
 using Accapt.Core.Servies.InterFace;
+using Accapt.Views.Account;
+using Accapt.WpfServies;
+using ApiRequest.Net.CallApi;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,17 +28,41 @@ namespace AccaptFullyVersion.App.Views
     public partial class LoginPage : Window
     {
         private readonly MainWindow _mainWindow;
-        private readonly ApiCallServies _callApiServies;
+        private readonly CallApi _callApiServies;
+        public string userName;
         public LoginPage(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-            _callApiServies = new ApiCallServies();
+            _callApiServies = new CallApi();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            
+            var data = new
+            {
+                UserName = txtUserName.Text,
+                Password = txtPassword.Password
+            };
+
+            var responesMessage = await _callApiServies.SendPostRequest<LoginResponseDTO>("https://localhost:7146/api/ManageUsers(V1)/LGU(V1)", data);
+
+            if(responesMessage.IsSuccess)
+            {
+                var token = responesMessage.Data.Token;
+                var userName = JwtHelper.GetUsernameFromToken(token);
+                UserSession.Instance.JwtToken = token;
+                UserSession.Instance.Username = userName;
+
+                MessageBox.Show($"خوش آمدید {txtUserName.Text}", "خوش آمد گویی", MessageBoxButton.OK, MessageBoxImage.Information);
+                _mainWindow.Visibility = Visibility.Visible;
+                _mainWindow.formId = 0;
+                _mainWindow.IsLogin = true;
+                this.Close();
+                return;
+            }
+
+            MessageBox.Show(responesMessage.Message, "خطا", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void btnSingUp_Click(object sender, RoutedEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using Accapt.Core.DTOs;
 using Accapt.Core.Servies;
+using ApiRequest.Net.CallApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,12 +26,12 @@ namespace AccaptFullyVersion.App.Views
     public partial class RegisterPage : Window
     {
         private readonly MainWindow _mainWindow;
-        private readonly ApiCallServies _callApiServies;
+        private readonly CallApi _callApiServies;
         public RegisterPage(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-            _callApiServies = new ApiCallServies();
+            _callApiServies = new CallApi();
         }
 
         private void btnSingin_Click(object sender, RoutedEventArgs e)
@@ -42,6 +43,7 @@ namespace AccaptFullyVersion.App.Views
 
         private async void btnRegister_Click(object sender, RoutedEventArgs e)
         {
+
             var data = new
             {
                 Name = txtName.Text,
@@ -53,17 +55,17 @@ namespace AccaptFullyVersion.App.Views
                 PhoneNumber = txtPhoneNumber.Text
             };
 
-            var responeMessage = await _callApiServies.SendRequest<object>(HttpMethod.Post, "https://localhost:7146/api/ManageUsers(V1)/RGU(V1)", data , "");
+            var responeMessage = await _callApiServies.SendPostRequest<object>("https://localhost:7146/api/ManageUsers(V1)/RGU(V1)", data);
 
             if (responeMessage.IsSuccess)
             {
-                MessageBox.Show(responeMessage.Message);
+                MessageBox.Show("ثبت نام با موفقیت انجام شد", "موفقیت", MessageBoxButton.OK, MessageBoxImage.Information);
                 LoginPage loginPage = new LoginPage(_mainWindow);
                 loginPage.Visibility = Visibility.Visible;
                 this.Close();
             }
 
-            MessageBox.Show(responeMessage.Message);
+            MessageBox.Show(responeMessage.Message, "خطا", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

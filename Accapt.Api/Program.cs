@@ -1,9 +1,20 @@
 using Accapt.Core.Servies;
 using Accapt.Core.Servies.InterFace;
 using Accapt.DataLayer.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+//dontForgot to use this for patch :)
+builder.Services.AddControllers(options =>
+{
+    options.ReturnHttpNotAcceptable = true;
+
+}).AddNewtonsoftJson();
 
 #region DbContext
 
@@ -12,19 +23,43 @@ builder.Services.AddDbContext<AccaptFContext>(options =>
 
 #endregion
 
+#region Jwt
+
+var key = Encoding.ASCII.GetBytes(builder.Configuration["Authentication:SecretForKey"]);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(oprions =>
+{
+    oprions.RequireHttpsMetadata = false;
+    oprions.SaveToken = true;
+    oprions.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidIssuer = builder.Configuration["Authentication:Issuer"],
+        ValidAudience = builder.Configuration["Authentication:Audience"]
+    };
+});
+
+#endregion
 
 #region IOC
 
-builder.Services.AddTransient<ICallApiServies, CallApiServies>();
 builder.Services.AddTransient<IRegisterUserServies, RegisterUserServies>();
-builder.Services.AddTransient<IApiCallServies, ApiCallServies>();
 builder.Services.AddTransient<IFindUserServies, FindeUserServies>();
 builder.Services.AddTransient<ILoginUserServies, LoginUserServies>();
+builder.Services.AddTransient<IUserServies, UserServies>();
+builder.Services.AddTransient<IAuthenticationJwtServies, AuthenticationJwtServies>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 #endregion
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -32,7 +67,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

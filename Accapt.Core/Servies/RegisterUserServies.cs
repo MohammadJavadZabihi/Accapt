@@ -61,6 +61,7 @@ namespace Accapt.Core.Servies
                 while (existGUID)
                 {
                     guiId = NameGenerator.GenerateUniqCode();
+                    existGUID = await _context.Users.AnyAsync(u => u.Id == guiId);
                 }
 
                 var currentDat = DateTime.UtcNow;

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Accapt.Core.DTOs;
+using Accapt.WpfServies;
+using AccaptFullyVersion.App;
+using ApiRequest.Net.CallApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +24,47 @@ namespace Accapt.Views.Account
     /// </summary>
     public partial class UserMangeAccount : Page
     {
+        private readonly CallApi _callApi;
+
         public UserMangeAccount()
         {
             InitializeComponent();
+            _callApi = new CallApi();
+        }
+
+        private async void frmUserManegAcc_Loaded(object sender, RoutedEventArgs e)
+        {
+            var data2 = new
+            {
+                userName = UserSession.Instance.Username
+            };
+            var user = await _callApi.SendGetRequest<GetSingleUserDTO>("https://localhost:7146/api/ManageUsers(V1)/GSU(V1)", data2);
+
+            if (user.IsSuccess)
+            {
+                var data = user.Data;
+                lblWelcomUser.Text = $"خوش آمدید {data.UserName}";
+                lblEmail.Text = data.Email;
+                lblFullName.Text = data.RealFullName;
+                lblUserName.Text = data.UserName;
+                lblPhoneNumber.Text = data.PhoneNumber;
+            }
+            else
+            {
+                MessageBox.Show("خطا در نمایش اطلاعات کاربر", "خطا", MessageBoxButton.OK, MessageBoxImage.Error);
+                lblWelcomUser.Text = "خطا در نمایش اطلاعات کاربر";
+                lblEmail.Text = "خطا در نمایش اطلاعات کاربر";
+                lblFullName.Text = "خطا در نمایش اطلاعات کاربر";
+                lblUserName.Text = "خطا در نمایش اطلاعات کاربر";
+                lblPhoneNumber.Text = "خطا در نمایش اطلاعات کاربر";
+            }
+        }
+
+        private void btnEditeUserName_Click(object sender, RoutedEventArgs e)
+        {
+            UserMabgeAccountEditeOrDeletPage page = new UserMabgeAccountEditeOrDeletPage(_callApi);
+            page.SetProperty(lblUserName.Text);
+            page.ShowDialog();
         }
     }
 }

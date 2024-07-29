@@ -1,6 +1,8 @@
 ﻿using Accapt.Core.Servies;
 using Accapt.Core.Servies.InterFace;
+using Accapt.Views.Account;
 using AccaptFullyVersion.App.Views;
+using ApiRequest.Net.CallApi;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,13 +21,14 @@ namespace AccaptFullyVersion.App
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly CallApi _callApiServies;
+        public bool IsLogin = false;
         public int formId = -1;
-        private readonly ApiCallServies _callApiServies;
         public MainWindow()
         {
             InitializeComponent();
-            _callApiServies = new ApiCallServies();
-            if (formId == -1)
+            _callApiServies = new CallApi();
+            if (formId == -1 && !IsLogin)
             {
                 LoginPage loginPage = new LoginPage(this);
                 loginPage.ShowDialog();
@@ -34,7 +37,13 @@ namespace AccaptFullyVersion.App
 
         private void btnAccountDetails_Click(object sender, RoutedEventArgs e)
         {
-            fContainer.Navigate(new Uri("Views/Account/UserMangeAccountPage.xaml", UriKind.RelativeOrAbsolute));
+            UserMangeAccount manageAccountPage = new UserMangeAccount();
+            fContainer.Navigate(manageAccountPage);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

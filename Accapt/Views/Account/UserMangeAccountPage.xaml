@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Accapt.Views.Account"
       mc:Ignorable="d" 
       d:DesignHeight="730" d:DesignWidth="1080"
-      Title="UserMangeAccount">
+      Title="UserMangeAccount" x:Name="frmUserManegAcc" Loaded="frmUserManegAcc_Loaded">
 
     <Border Background="#FFFFFF">
         <Grid>
@@ -34,13 +34,13 @@
                 </Grid.RowDefinitions>
 
                 <Viewbox Margin="50,0,50,0" MaxHeight="110" MinHeight="80" MinWidth="400"  MaxWidth="800" Height="75" VerticalAlignment="Top" >
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Height="45">
 
                         <Button Style="{StaticResource EDIT}" Content="تغیر کلمه عبور" FontSize="10" MaxWidth="90" MaxHeight="32"/>
 
                         <Button  Style="{StaticResource EDIT}" Content="حذف حساب کاربری" FontSize="10" MaxWidth="90" MaxHeight="32"/>
 
-                        <TextBlock Style="{StaticResource LRTexBlock}" Text="امیر عزیز خوش آمدی" FontSize="15" VerticalAlignment="Center" Width="130" Margin="0 0 20 0"/>
+                        <TextBlock x:Name="lblWelcomUser" Style="{StaticResource LRTexBlock}"  FontSize="15" VerticalAlignment="Center" Width="156" Margin="0 0 20 0"/>
 
 
 
@@ -62,12 +62,12 @@
 
                                 <TextBlock Text=": ایمیل" Style="{StaticResource LRTexBlock}" Margin="0 10 20 0" FontSize="25"/>
 
-                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}">
+                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}" x:Name="btnEditeEmail">
                                     <Image Source="/ImageResurce/EditeIcon.png" />
                                 </Button>
 
 
-                                <TextBlock Text="mahanzabihi@gmail.com" Style="{StaticResource LRTexBlock}" Margin="0 5 20 0" Grid.Row="1" FontSize="20"/>
+                                <TextBlock x:Name="lblEmail"  Style="{StaticResource LRTexBlock}" Margin="0 5 20 0" Grid.Row="1" FontSize="20"/>
 
                             </Grid>
 
@@ -83,12 +83,12 @@
 
                                 <TextBlock Text=": نام کاربری" Style="{StaticResource LRTexBlock}" Margin="0 10 20 0" FontSize="25"/>
 
-                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}">
+                                <Button x:Name="btnEditeUserName" HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}" Click="btnEditeUserName_Click">
                                     <Image Source="/ImageResurce/EditeIcon.png" />
                                 </Button>
 
 
-                                <TextBlock Text="امیر" Style="{StaticResource LRTexBlock}" Margin="0 5 20 0" Grid.Row="1" FontSize="20"/>
+                                <TextBlock x:Name="lblUserName" Style="{StaticResource LRTexBlock}" Margin="0 5 20 0" Grid.Row="1" FontSize="20"/>
 
                             </Grid>
 
@@ -110,12 +110,12 @@
 
                                 <TextBlock Text=": نام و نام خوانوادگی" Style="{StaticResource LRTexBlock}" Margin="0 10 20 0" FontSize="22"/>
 
-                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}">
+                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}" x:Name="btnEditeFullName">
                                     <Image Source="/ImageResurce/EditeIcon.png" />
                                 </Button>
 
 
-                                <TextBlock Text="امیر احمدی" Style="{StaticResource LRTexBlock}" Margin="0 5 20 0" Grid.Row="1" FontSize="20"/>
+                                <TextBlock x:Name="lblFullName" Style="{StaticResource LRTexBlock}" Margin="0 5 20 0" Grid.Row="1" FontSize="20"/>
 
                             </Grid>
 
@@ -131,12 +131,12 @@
 
                                 <TextBlock Text=": تلفن همراه" Style="{StaticResource LRTexBlock}" Margin="0 10 20 0" FontSize="25"/>
 
-                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}">
+                                <Button HorizontalAlignment="Left" Width="30" Margin="30,7,0,3" Style="{StaticResource EditeAccountDetails}" x:Name="btnEditePhoneNumber">
                                     <Image Source="/ImageResurce/EditeIcon.png" />
                                 </Button>
 
 
-                                <TextBlock Text="09199999999" Style="{StaticResource LRTexBlock}" Margin="0 5 20 0" Grid.Row="1" FontSize="20"/>
+                                <TextBlock x:Name="lblPhoneNumber" Style="{StaticResource LRTexBlock}" Margin="0 5 20 0" Grid.Row="1" FontSize="20"/>
 
                             </Grid>
 

@@ -19,11 +19,5 @@ namespace Accapt.Core.DTOs
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string Password { get; set; } = string.Empty;
-
-        [DisplayName("تکرار رمز عبور")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-        [Compare("Password")]
-        public string RePassword { get; set; } = string.Empty;
     }
 }

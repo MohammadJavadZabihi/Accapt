@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Accapt.Core.Servies.InterFace
 {
-    public interface IApiCallServies
+    public interface IAuthenticationJwtServies
     {
-        Task<ApiResponse<T>> SendRequest<T>(HttpMethod method, string url, object? data, string jwt);
+        Task<string> AuthenticatJwtToken(LoginUserDTO userLogin);
     }
 }
