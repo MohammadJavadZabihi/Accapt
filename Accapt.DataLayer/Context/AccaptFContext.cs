@@ -18,6 +18,8 @@ namespace Accapt.DataLayer.Context
         #region User Table
 
         public DbSet<Users> Users { get; set; }
+        public DbSet<Product> products { get; set; }
+        public DbSet<ProductCatrgory> ProductCatrgories { get; set; }
 
         #endregion
     }

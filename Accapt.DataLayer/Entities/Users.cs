@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Accapt.DataLayer.Entities
 {
     public class Users
     {
+        public Users()
+        {
+            
+        }
+
         [Key]
         public string Id { get; set; }
 
@@ -47,5 +53,13 @@ namespace Accapt.DataLayer.Entities
 
         [Required]
         public DateTime ExpireAccessDate { get; set; }
+
+
+        #region Realations
+
+        [JsonIgnore]
+        public IEnumerable<Product> Products { get; set; }
+
+        #endregion
     }
 }

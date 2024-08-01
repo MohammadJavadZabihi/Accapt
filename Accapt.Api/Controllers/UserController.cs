@@ -10,6 +10,8 @@ namespace Accapt.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        #region Injection
+
         private readonly IRegisterUserServies _registerServies;
         private readonly ILoginUserServies _loginUserServies;
         private readonly IFindUserServies _findUserServies;
@@ -29,8 +31,9 @@ namespace Accapt.Api.Controllers
             _mapper = mapper ?? throw new ArgumentException(nameof(mapper));
             _userServies = userServies ?? throw new ArgumentException(nameof(userServies));
             _authenticationJwtServies = authenticationJwtServies ?? throw new ArgumentException(nameof(authenticationJwtServies));
-
         }
+
+        #endregion
 
         #region Register User
 
@@ -99,7 +102,7 @@ namespace Accapt.Api.Controllers
         #region Update User
 
         [HttpPatch("UPD(V1)/{userName}")]
-        public async Task<IActionResult> UpdatedUser(string userName, [FromBody] JsonPatchDocument<UserUpdateAccountViewModel> patchDocument)
+        public async Task<IActionResult> UpdatedUser(string userName, [FromBody] JsonPatchDocument<UserUpdateDTO> patchDocument)
         {
             if (patchDocument == null || !ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -114,7 +117,7 @@ namespace Accapt.Api.Controllers
             if (user == null)
                 return NotFound();
 
-            var usertToPatch = _mapper.Map<UserUpdateAccountViewModel>(user);
+            var usertToPatch = _mapper.Map<UserUpdateDTO>(user);
 
             patchDocument.ApplyTo(usertToPatch, ModelState);
 
@@ -122,7 +125,7 @@ namespace Accapt.Api.Controllers
                 return BadRequest(ModelState);
 
             _mapper.Map(usertToPatch, user);
-            _userServies.SaveChanges();
+            await _userServies.SaveChanges();
 
             return Ok(user);
         }

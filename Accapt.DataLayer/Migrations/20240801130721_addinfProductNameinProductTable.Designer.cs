@@ -4,6 +4,7 @@ using Accapt.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Accapt.DataLayer.Migrations
 {
     [DbContext(typeof(AccaptFContext))]
-    partial class AccaptFContextModelSnapshot : ModelSnapshot
+    [Migration("20240801130721_addinfProductNameinProductTable")]
+    partial class addinfProductNameinProductTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +44,6 @@ namespace Accapt.DataLayer.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductCount")
-                        .HasColumnType("int");
-
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -57,7 +57,7 @@ namespace Accapt.DataLayer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("products");
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("Accapt.DataLayer.Entities.ProductCatrgory", b =>
@@ -80,7 +80,7 @@ namespace Accapt.DataLayer.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductCatrgories");
+                    b.ToTable("ProductCatrgory");
                 });
 
             modelBuilder.Entity("Accapt.DataLayer.Entities.Users", b =>

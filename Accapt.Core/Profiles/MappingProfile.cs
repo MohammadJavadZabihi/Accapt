@@ -7,14 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AccaptFullyVersion.Core.ProfileMapp
+namespace Accapt.Core.Profiles
 {
     public class MappingProfile : Profile
     {
         public MappingProfile()
         {
-            CreateMap<UserUpdateAccountViewModel, Users>();
-            CreateMap<Users, UserUpdateAccountViewModel>();
+            CreateMap<Product, ProductUpdateDTO>();
+            CreateMap<ProductUpdateDTO, Product>();
+            CreateMap<UserDTO, Users>();
+            CreateMap<Users, UserDTO>();
         }
     }
 }

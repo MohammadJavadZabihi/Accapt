@@ -50,6 +50,7 @@ namespace AccaptFullyVersion.App.Views
             if(responesMessage.IsSuccess)
             {
                 var token = responesMessage.Data.Token;
+
                 var userName = JwtHelper.GetUsernameFromToken(token);
                 UserSession.Instance.JwtToken = token;
                 UserSession.Instance.Username = userName;

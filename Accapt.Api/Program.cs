@@ -55,6 +55,8 @@ builder.Services.AddTransient<IFindUserServies, FindeUserServies>();
 builder.Services.AddTransient<ILoginUserServies, LoginUserServies>();
 builder.Services.AddTransient<IUserServies, UserServies>();
 builder.Services.AddTransient<IAuthenticationJwtServies, AuthenticationJwtServies>();
+builder.Services.AddTransient<IProductServies, ProductServies>();
+builder.Services.AddTransient<IFindeProductServies, FindeProductServies>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 #endregion
