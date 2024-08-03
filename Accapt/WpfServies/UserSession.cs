@@ -24,6 +24,7 @@ namespace Accapt.WpfServies
 
         public string JwtToken { get; set; }
         public string Username { get; set; }
+        public string UserId { get; set; }
 
         private UserSession() { }
     }

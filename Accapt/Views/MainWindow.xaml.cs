@@ -1,6 +1,7 @@
 ﻿using Accapt.Core.Servies;
 using Accapt.Core.Servies.InterFace;
 using Accapt.Views.Account;
+using Accapt.Views.Products;
 using AccaptFullyVersion.App.Views;
 using ApiRequest.Net.CallApi;
 using System.Text;
@@ -44,6 +45,12 @@ namespace AccaptFullyVersion.App
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnStore_Click(object sender, RoutedEventArgs e)
+        {
+            ShowProductPage showProductPage = new ShowProductPage();
+            fContainer.Navigate(showProductPage);
         }
     }
 }

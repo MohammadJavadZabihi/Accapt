@@ -1,5 +1,6 @@
 ﻿using Accapt.Core.DTOs;
 using Accapt.Core.Servies.InterFace;
+using Accapt.DataLayer.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -34,7 +35,7 @@ namespace Accapt.Api.Controllers
         [Authorize]
         public async Task<IActionResult> AddProduct(AddProductDTO addProductDTO)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var product = await _productServies.AddProduct(addProductDTO);
@@ -53,7 +54,7 @@ namespace Accapt.Api.Controllers
         [Authorize]
         public async Task<IActionResult> DeletProductByName(SingleProductNameDTO productName)
         {
-            if(!ModelState.IsValid || productName.ProductName == null)
+            if (!ModelState.IsValid || productName.ProductName == null)
                 return BadRequest(ModelState);
 
             var product = await _findeProductServies.FindeProduct(productName.ProductName);
@@ -76,7 +77,7 @@ namespace Accapt.Api.Controllers
         [HttpPatch("UPP(V1)/{productName}")]
         public async Task<IActionResult> UpdateProduct(string productName, [FromBody] JsonPatchDocument<ProductUpdateDTO> patchDocument)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var product = await _findeProductServies.FindeProduct(productName);
@@ -93,6 +94,22 @@ namespace Accapt.Api.Controllers
 
             _mapper.Map(productToPatch, product);
             await _productServies.Save();
+
+            return Ok(product);
+        }
+
+        #endregion
+
+        #region GetProducts
+
+        [HttpGet("GTAP(V1)")]
+        public async Task<IActionResult> GetAllProducts([FromQuery] int pageNumber, [FromQuery] int pageSize,
+            [FromQuery]string filter = "", [FromQuery] string userId = "")
+        {
+            var product = await _productServies.GetProducts(pageNumber, pageSize, filter, userId);
+
+            if (product == null)
+                return NotFound();
 
             return Ok(product);
         }

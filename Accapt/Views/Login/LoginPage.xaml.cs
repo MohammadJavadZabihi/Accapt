@@ -52,8 +52,11 @@ namespace AccaptFullyVersion.App.Views
                 var token = responesMessage.Data.Token;
 
                 var userName = JwtHelper.GetUsernameFromToken(token);
+                var userId = JwtHelper.GetUserIdFromToken(token);
+
                 UserSession.Instance.JwtToken = token;
                 UserSession.Instance.Username = userName;
+                UserSession.Instance.UserId = userId;
 
                 MessageBox.Show($"خوش آمدید {txtUserName.Text}", "خوش آمد گویی", MessageBoxButton.OK, MessageBoxImage.Information);
                 _mainWindow.Visibility = Visibility.Visible;

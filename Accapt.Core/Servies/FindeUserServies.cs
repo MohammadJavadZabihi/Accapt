@@ -18,6 +18,11 @@ namespace Accapt.Core.Servies
             _context = context ?? throw new ArgumentException(nameof(context));
         }
 
+        public async Task<Users?> FindUserById(string Id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == Id);
+        }
+
         public async Task<Users?> FindUserByUserName(string userName)
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName);

@@ -25,7 +25,7 @@
 
                             <Button Style="{StaticResource MainMenuButton}" Content="اشخاص"/>
 
-                            <Button Style="{StaticResource MainMenuButton}" Content="انبار"/>
+                            <Button x:Name="btnStore" Style="{StaticResource MainMenuButton}" Content="انبار" Click="btnStore_Click"/>
 
                             <Button Style="{StaticResource MainMenuButton}" Content="فاکتورها"/>
 

@@ -2,6 +2,7 @@
 using Accapt.Core.Servies.InterFace;
 using Accapt.DataLayer.Context;
 using Accapt.DataLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,6 +75,42 @@ namespace Accapt.Core.Servies
             {
                 return false;
             }
+        }
+
+        public async Task<IEnumerable<Product?>> GetProducts(int pageNumber = 1, int pageSize = 0,
+            string filter = "", string userId = "")
+        {
+            try
+            {
+                var user = await _findUserServies.FindUserById(userId);
+
+                if (user == null)
+                    return null;
+
+                if (pageSize == 0)
+                    pageSize = 8;
+
+                IQueryable<Product> products = _context.products.AsNoTracking();
+
+                products = products.Where(p => p.UserId == userId);
+
+                if (!string.IsNullOrEmpty(filter))
+                {
+                    products = products.Where(p => p.ProductName.Contains(filter));
+                    if (products.Count() == 0)
+                        return null;
+                }
+
+                var skip = (pageNumber - 1) * pageSize;
+
+                return await products.Skip(skip).Take(pageSize).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
         }
 
         public async Task Save()

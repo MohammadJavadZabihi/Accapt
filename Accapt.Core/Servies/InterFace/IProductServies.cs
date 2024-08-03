@@ -12,6 +12,7 @@ namespace Accapt.Core.Servies.InterFace
     {
         Task<object?> AddProduct(AddProductDTO addProduct);
         Task<bool> DeletProduct(Product product);
+        Task<IEnumerable<Product?>> GetProducts(int pageNumber = 1, int pageSize = 0, string filter = "", string userId = "");
         Task Save();
     }
 }

@@ -29,6 +29,7 @@ namespace Accapt.Core.Servies
             var signingCredentials = new SigningCredentials(security, SecurityAlgorithms.HmacSha256);
             var claimsForToken = new List<Claim>();
             claimsForToken.Add(new Claim("userName", userLogin.UserName.ToString()));
+            claimsForToken.Add(new Claim("userId", userLogin.UserId.ToString()));
 
             var jwtSecurityToke = new JwtSecurityToken(
                 _configuration["Authentication:Issuer"],

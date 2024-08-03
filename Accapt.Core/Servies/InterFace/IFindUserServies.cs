@@ -12,5 +12,6 @@ namespace Accapt.Core.Servies.InterFace
         Task<bool> IsExsistUserName(string userName);
         Task<bool> IsExsistEmail(string email);
         Task<Users?> FindUserByUserName(string userName);
+        Task<Users?> FindUserById(string Id);
     }
 }

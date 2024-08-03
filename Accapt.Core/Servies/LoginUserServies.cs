@@ -56,6 +56,8 @@ namespace Accapt.Core.Servies
                         Message = "Password Is Wrong"
                     };
 
+                user.UserId = existUser.Id;
+
                 return new ReturniStatuceDTO
                 {
                     Data = loginUser,
