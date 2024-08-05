@@ -102,6 +102,7 @@ namespace Accapt.Api.Controllers
 
         #region GetProducts
 
+        [Authorize]
         [HttpGet("GTAP(V1)")]
         public async Task<IActionResult> GetAllProducts([FromQuery] int pageNumber, [FromQuery] int pageSize,
             [FromQuery]string filter = "", [FromQuery] string userId = "")
@@ -111,7 +112,12 @@ namespace Accapt.Api.Controllers
             if (product == null)
                 return NotFound();
 
-            return Ok(product);
+            return Ok(new
+            {
+                Products = product,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            });
         }
 
         #endregion

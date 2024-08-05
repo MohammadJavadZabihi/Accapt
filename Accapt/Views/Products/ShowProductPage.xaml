@@ -6,16 +6,19 @@
       xmlns:local="clr-namespace:Accapt.Views.Products"
       mc:Ignorable="d" 
       d:DesignHeight="730" d:DesignWidth="1080"
-      Title="ShowProductPage">
+      Title="ShowProductPage" Loaded="Page_Loaded">
 
     <Border Background="#FFFFFF">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <DataGrid x:Name="productDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="1">
+            <!--#region datagrid -->
+
+            <DataGrid x:Name="productDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="1" Margin="20">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn CanUserReorder="False" Width="auto">
                         <DataGridCheckBoxColumn.HeaderTemplate>
@@ -25,32 +28,41 @@
                         </DataGridCheckBoxColumn.HeaderTemplate>
                     </DataGridCheckBoxColumn>
 
-                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto"/>
+                    <DataGridTextColumn Binding="{Binding ProductId}" Header="#" IsReadOnly="True" CanUserResize="False" Width="auto"/>
 
                     <DataGridTemplateColumn Header="محصولات" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="Red">
-                                        <TextBlock Text="..." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                    <Border Width="25" Height="25" CornerRadius="20" Margin="0 0 10 0" Background="Red">
+                                        <TextBlock Text="{Binding CatrgoryId}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
                                     </Border>
 
-                                    <TextBlock Text="..." VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding CatrgoryId}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    
-                    <DataGridTextColumn Header="position" IsReadOnly="True"  Width="*"/>
-                    <DataGridTextColumn Header="position" IsReadOnly="True"  Width="*"/>
-                    <DataGridTextColumn Header="position" IsReadOnly="True"  Width="*"/>
+
+                    <DataGridTextColumn Binding="{Binding ProductName}" Header="نام محصول" IsReadOnly="True"  Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Price}" Header="قیمت محصول" IsReadOnly="True"  Width="*"/>
+                    <DataGridTextColumn Binding="{Binding ProductCount}" Header="تعداد محصول" IsReadOnly="True"  Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Description}" Header="توضیحات" IsReadOnly="True"  Width="*"/>
 
                     <DataGridTemplateColumn Header="operation" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Foreground="Red"/>
-                                    <Button Foreground="Green"/>
+                                    <Button Background="#B13939" Style="{StaticResource btnDeletandEditeSHoProduct}" Margin="0 0 10 0">
+                                        <Button.Content>
+                                            <Image Source="/ImageResurce/EditeIcon.png"/>
+                                        </Button.Content>
+                                    </Button>
+                                    <Button Background="#00719A" Style="{StaticResource btnDeletandEditeSHoProduct}">
+                                        <Button.Content>
+                                            <Image Source="/ImageResurce/EditeIcon.png"/>
+                                        </Button.Content>
+                                    </Button>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -58,7 +70,24 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            
+            <!--#endregion-->
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                
+                <Button x:Name="btnBefor" Grid.Row="0" Content=">" Style="{StaticResource btnNextAndBeforShowProduct}" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="btnBefor_Click" Margin="0 0 10 0">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+                
+                <Button x:Name="btnNext" Grid.Row="0" Content=">" Style="{StaticResource btnNextAndBeforShowProduct}" VerticalAlignment="Center" Click="btnNext_Click" Margin="0 0 20 0"/>
+            </StackPanel>
+
         </Grid>
     </Border>
 </Page>
