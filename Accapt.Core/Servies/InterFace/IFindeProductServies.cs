@@ -10,5 +10,6 @@ namespace Accapt.Core.Servies.InterFace
     public interface IFindeProductServies
     {
         Task<Product?> FindeProduct(string productName);
+        Task<Product?> FindeProduct(int productId);
     }
 }

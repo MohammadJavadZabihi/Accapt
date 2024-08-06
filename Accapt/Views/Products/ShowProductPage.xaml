@@ -13,7 +13,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="4*"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!--#region datagrid -->
@@ -73,8 +72,15 @@
             <!--#endregion-->
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+                <Button x:Name="btnSearch" Style="{StaticResource EditeButton}" Background="#253E4E" Content="جست و جو" Foreground="White" Click="btnSearch_Click"/>
+
+                <TextBox x:Name="txtSearch" Style="{StaticResource LRTextBox}" Margin="0 0 10 0" Template="{StaticResource LRUserTextBox}"/>
                 
-                <Button x:Name="btnBefor" Grid.Row="0" Content=">" Style="{StaticResource btnNextAndBeforShowProduct}" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="btnBefor_Click" Margin="0 0 10 0">
+                <TextBlock Text=": جست و جو" Style="{StaticResource LRTexBlock}" VerticalAlignment="Center" Margin="0 0 50 0" FontSize="25"/>
+
+
+                <Button x:Name="btnBefor" Grid.Row="0" Content=">" Style="{StaticResource btnNextAndBeforShowProduct}" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="btnBefor_Click" Margin="0 0 10 0" Background="#4E2526">
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleX="-1"/>
@@ -84,10 +90,11 @@
                         </TransformGroup>
                     </Button.RenderTransform>
                 </Button>
-                
-                <Button x:Name="btnNext" Grid.Row="0" Content=">" Style="{StaticResource btnNextAndBeforShowProduct}" VerticalAlignment="Center" Click="btnNext_Click" Margin="0 0 20 0"/>
-            </StackPanel>
 
+                <Button x:Name="btnNext" Grid.Row="0" Content=">" Style="{StaticResource btnNextAndBeforShowProduct}" VerticalAlignment="Center" Click="btnNext_Click" Margin="0 0 20 0" Background="#254E45"/>
+
+            </StackPanel>
+            
         </Grid>
     </Border>
 </Page>

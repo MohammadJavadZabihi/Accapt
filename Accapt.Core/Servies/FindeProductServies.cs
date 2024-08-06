@@ -22,5 +22,10 @@ namespace Accapt.Core.Servies
         {
             return await _context.products.FirstOrDefaultAsync(p => p.ProductName == productName);
         }
+
+        public async Task<Product?> FindeProduct(int productId)
+        {
+            return await _context.products.FirstOrDefaultAsync(p => p.ProductId == productId);
+        }
     }
 }

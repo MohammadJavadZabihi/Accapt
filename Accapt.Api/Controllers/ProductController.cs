@@ -74,13 +74,13 @@ namespace Accapt.Api.Controllers
 
         #region UpdateProduct
 
-        [HttpPatch("UPP(V1)/{productName}")]
-        public async Task<IActionResult> UpdateProduct(string productName, [FromBody] JsonPatchDocument<ProductUpdateDTO> patchDocument)
+        [HttpPatch("UPP(V1)/{producId}")]
+        public async Task<IActionResult> UpdateProduct(int productId, [FromBody] JsonPatchDocument<ProductUpdateDTO> patchDocument)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var product = await _findeProductServies.FindeProduct(productName);
+            var product = await _findeProductServies.FindeProduct(productId);
 
             if (product == null)
                 return NotFound();
