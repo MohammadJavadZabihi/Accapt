@@ -106,5 +106,15 @@ namespace Accapt.Views.Products
         {
             
         }
+
+        private void btnDelet_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnEdite_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

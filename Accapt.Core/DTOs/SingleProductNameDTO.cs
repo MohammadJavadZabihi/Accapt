@@ -8,6 +8,6 @@ namespace Accapt.Core.DTOs
 {
     public class SingleProductNameDTO
     {
-        public string ProductName { get; set; } = string.Empty;
+        public int ProductId { get; set; }
     }
 }

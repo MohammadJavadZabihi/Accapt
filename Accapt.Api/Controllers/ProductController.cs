@@ -54,10 +54,10 @@ namespace Accapt.Api.Controllers
         [Authorize]
         public async Task<IActionResult> DeletProductByName(SingleProductNameDTO productName)
         {
-            if (!ModelState.IsValid || productName.ProductName == null)
+            if (!ModelState.IsValid || productName.ProductId == null)
                 return BadRequest(ModelState);
 
-            var product = await _findeProductServies.FindeProduct(productName.ProductName);
+            var product = await _findeProductServies.FindeProduct(productName.ProductId);
 
             if (product == null)
                 return BadRequest("null product");
