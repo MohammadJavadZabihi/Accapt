@@ -48,13 +48,13 @@
                     <DataGridTextColumn Binding="{Binding ProductCount}" Header="تعداد محصول" IsReadOnly="True"  Width="*"/>
                     <DataGridTextColumn Binding="{Binding Description}" Header="توضیحات" IsReadOnly="True"  Width="*"/>
 
-                    <DataGridTemplateColumn Header="operation" Width="auto">
+                    <DataGridTemplateColumn Header="عملیات" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Button x:Name="btnDelet" Background="#B13939" Style="{StaticResource btnDeletandEditeSHoProduct}" Margin="0 0 10 0" Click="btnDelet_Click">
                                         <Button.Content>
-                                            <Image Source="/ImageResurce/EditeIcon.png"/>
+                                            <Image Source="/ImageResurce/deletIcon.png"/>
                                         </Button.Content>
                                     </Button>
                                     <Button x:Name="btnEdite" Background="#00719A" Style="{StaticResource btnDeletandEditeSHoProduct}" Click="btnEdite_Click">

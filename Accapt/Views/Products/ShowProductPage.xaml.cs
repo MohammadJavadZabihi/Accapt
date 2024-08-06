@@ -5,6 +5,7 @@ using ApiRequest.Net.CallApi;
 using Microsoft.Identity.Client.NativeInterop;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,7 +93,7 @@ namespace Accapt.Views.Products
         private void btnBefor_Click(object sender, RoutedEventArgs e)
         {
             _currentPage--;
-            if( _currentPage > 0 )
+            if (_currentPage > 0)
             {
                 LoadProducts(_currentPage);
             }
@@ -104,17 +105,69 @@ namespace Accapt.Views.Products
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
-        private void btnDelet_Click(object sender, RoutedEventArgs e)
+        private async void btnDelet_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (productDataGrid.SelectedItem is Product product)
+                {
+                    int productId = product.ProductId;
 
+                    SingleProductNameDTO dtoP = new SingleProductNameDTO
+                    {
+                        ProductId = productId
+                    };
+
+                    if (productId != 0)
+                    {
+                        if(MessageBox.Show("آیا از حذف ایتم انتخوابی مطمعئن هستید؟", "اطمینان", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        {
+                            var responseMessage = await _calApiServies.SendDeletRequest<object>("https://localhost:7146/api/MangeProduct(V1)/DLP(V1)", dtoP, UserSession.Instance.JwtToken);
+                            if(responseMessage.IsSuccess)
+                            {
+                                MessageBox.Show("محصول انتخوابی با موفقیت حذف شد", "موفقیت", MessageBoxButton.OK, MessageBoxImage.Information);
+                                LoadProducts(_currentPage);
+                            }
+                            else
+                            {
+                                MessageBox.Show($"Error Message : {responseMessage.Message}", "خطا", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("لطفا اول ایتمی را انتخواب کنید و بعد اقدام به اجرای عملیات بر روی آن بکنید", "خطا", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error Message : {ex.Message}", "خطا", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnEdite_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (productDataGrid.SelectedItem is Product product)
+                {
+                    int productId = product.ProductId;
 
+                    if(productId != 0)
+                    {
+                        AddOrEditeProducts addOrEditeProducts = new AddOrEditeProducts();
+                        addOrEditeProducts.ShowDialog();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error Message : {ex.Message}", "خطا", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

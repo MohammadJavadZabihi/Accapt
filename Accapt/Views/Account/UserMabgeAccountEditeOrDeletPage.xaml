@@ -12,7 +12,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <Border BorderBrush="#3A3A3A" BorderThickness="2" Width="390" Height="129" CornerRadius="15" Margin="0 60 0 0">
+            <Border BorderBrush="#3A3A3A" BorderThickness="2" Width="390" Height="129" CornerRadius="15" Margin="0 50 0 0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>

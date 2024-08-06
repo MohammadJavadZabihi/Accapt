@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="ImageResurce\AccINC.png" />
     <None Remove="ImageResurce\AppINC.png" />
+    <None Remove="ImageResurce\deletIcon.png" />
     <None Remove="ImageResurce\EditeIcon.png" />
     <None Remove="ImageResurce\hmic.png" />
     <None Remove="ImageResurce\LoginIcon.png" />
@@ -48,6 +49,7 @@
     <Resource Include="ImageResurce\AppINC.png" />
     <Resource Include="ImageResurce\EditeIcon.png" />
     <Resource Include="ImageResurce\hmic.png" />
+    <Resource Include="ImageResurce\deletIcon.png" />
     <Resource Include="ImageResurce\LoginIcon.png" />
     <Resource Include="ImageResurce\Login_and_Register_Icon.png" />
     <Resource Include="ImageResurce\Profile.jpg" />

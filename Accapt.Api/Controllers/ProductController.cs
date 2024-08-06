@@ -50,7 +50,7 @@ namespace Accapt.Api.Controllers
 
         #region RemoveProduc
 
-        [HttpDelete("DLP(V1)/")]
+        [HttpDelete("DLP(V1)")]
         [Authorize]
         public async Task<IActionResult> DeletProductByName(SingleProductNameDTO productName)
         {
