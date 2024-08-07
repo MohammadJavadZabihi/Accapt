@@ -97,8 +97,11 @@ namespace Accapt.Core.Servies
                 if (!string.IsNullOrEmpty(filter))
                 {
                     products = products.Where(p => p.ProductName.Contains(filter));
+
                     if (products.Count() == 0)
                         return null;
+
+                    return products;
                 }
 
                 var skip = (pageNumber - 1) * pageSize;

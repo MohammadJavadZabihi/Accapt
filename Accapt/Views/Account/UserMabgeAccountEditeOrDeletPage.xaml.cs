@@ -88,7 +88,7 @@ namespace Accapt.Views.Account
 
             try
             {
-                var responeMessage = await _callApi.SendPatchRequest<DataLayer.Entities.Users>($"https://localhost:7146/api/ManageUsers(V1)/UPD(V1)/{UserSession.Instance.Username}", data);
+                var responeMessage = await _callApi.SendPatchRequest<DataLayer.Entities.Users>($"https://localhost:7146/api/ManageUsers(V1)/UPD(V1)/{UserSession.Instance.Username}", data, UserSession.Instance.JwtToken);
                 if(responeMessage.IsSuccess)
                 {
                     MessageBox.Show("تغیرات با موفقیت ثبت شد", "تغیرات", MessageBoxButton.OK, MessageBoxImage.Information);

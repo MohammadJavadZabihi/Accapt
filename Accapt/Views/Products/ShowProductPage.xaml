@@ -71,29 +71,45 @@
             </DataGrid>
             <!--#endregion-->
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Grid>
 
-                <Button x:Name="btnSearch" Style="{StaticResource EditeButton}" Background="#253E4E" Content="جست و جو" Foreground="White" Click="btnSearch_Click"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
 
-                <TextBox x:Name="txtSearch" Style="{StaticResource LRTextBox}" Margin="0 0 10 0" Template="{StaticResource LRUserTextBox}"/>
-                
-                <TextBlock Text=": جست و جو" Style="{StaticResource LRTexBlock}" VerticalAlignment="Center" Margin="0 0 50 0" FontSize="25"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+
+                    <Button x:Name="btnSearch" Style="{StaticResource EditeButtonProducPage}" Background="#253E4E" Content="جست و جو" Foreground="White" Click="btnSearch_Click" Width="150"/>
+
+                    <TextBox x:Name="txtSearch" Style="{StaticResource LRTextBox}" Margin="0 0 10 0" Template="{StaticResource LRUserTextBox}" Width="203" />
+
+                    <TextBlock Text=": جست و جو" Style="{StaticResource LRTexBlock}" VerticalAlignment="Center" Margin="0 0 35 0" FontSize="25"/>
 
 
-                <Button x:Name="btnBefor" Grid.Row="0" Content=">" Style="{StaticResource btnNextAndBeforShowProduct}" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="btnBefor_Click" Margin="0 0 10 0" Background="#4E2526">
-                    <Button.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Button.RenderTransform>
-                </Button>
+                    <Button x:Name="btnBefor" Grid.Row="0" Content=">" Style="{StaticResource btnNextAndBeforShowProduct}" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="btnBefor_Click" Margin="0 0 10 0" Background="#4E2526">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
 
-                <Button x:Name="btnNext" Grid.Row="0" Content=">" Style="{StaticResource btnNextAndBeforShowProduct}" VerticalAlignment="Center" Click="btnNext_Click" Margin="0 0 20 0" Background="#254E45"/>
+                    <Button x:Name="btnNext" Grid.Row="0" Content=">" Style="{StaticResource btnNextAndBeforShowProduct}" VerticalAlignment="Center" Click="btnNext_Click" Margin="0 0 20 0" Background="#254E45"/>
 
-            </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="btnAddProduct" Style="{StaticResource EditeButtonProducPage}" Content="افزودن کالا" Width="150" HorizontalAlignment="Right" Background="#27503E" Foreground="White" Click="btnAddProduct_Click" Margin="20 0 0 0"/>
+
+                    <Button x:Name="RefreshPage" Style="{StaticResource EditeButtonProducPage}" Content="تازه سازی" Width="150" HorizontalAlignment="Left" Foreground="White" Click="RefreshPage_Click" Margin="20 0 0 0"/>
+                </StackPanel>
+
+            </Grid>
+            
             
         </Grid>
     </Border>

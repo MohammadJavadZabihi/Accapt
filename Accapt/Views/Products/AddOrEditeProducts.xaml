@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Accapt.Views.Products"
         mc:Ignorable="d"
-        Title="AddOrEditeProducts" Height="700" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="AddOrEditeProducts" Height="700" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Border Background="#FFFFFF" CornerRadius="15">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -14,36 +14,36 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="1">
-                <TextBlock Style="{StaticResource LRTexBlock}" Text=": نام کالا" Margin="0 30 20 0" FontSize="23"/>
+                <TextBlock Style="{StaticResource LRTexBlock}" Text=": نام کالا" Margin="0 30 20 0" FontSize="23" Foreground="Red"/>
 
-                <TextBox Style="{StaticResource LRTextBox}" Template="{StaticResource LRUserTextBox}" HorizontalAlignment="Right" Margin="0 20 10 0" Width="460"/>
+                <TextBox x:Name="txtProductName" Style="{StaticResource LRTextBox}" Template="{StaticResource LRUserTextBox}" HorizontalAlignment="Right" Margin="0 20 10 0" Width="460"/>
 
-                <TextBlock Style="{StaticResource LRTexBlock}" Text=": تعداد کالا" Margin="0 20 20 0" FontSize="23"/>
+                <TextBlock Style="{StaticResource LRTexBlock}" Text=": تعداد کالا" Margin="0 20 20 0" FontSize="23" Foreground="Red"/>
 
-                <TextBox Style="{StaticResource LRTextBox}" Template="{StaticResource LRUserTextBox}" HorizontalAlignment="Right" Margin="0 20 10 0" Width="460" />
+                <TextBox x:Name="txtProductCount" Style="{StaticResource LRTextBox}" Template="{StaticResource LRUserTextBox}" HorizontalAlignment="Right" Margin="0 20 10 0" Width="460" />
 
-                <TextBlock Style="{StaticResource LRTexBlock}" Text=": قیمت کالا" Margin="0 20 20 0" FontSize="23"/>
+                <TextBlock Style="{StaticResource LRTexBlock}" Text=": قیمت کالا" Margin="0 20 20 0" FontSize="23" Foreground="Red"/>
 
-                <TextBox Style="{StaticResource LRTextBox}" Template="{StaticResource LRUserTextBox}" HorizontalAlignment="Right" Margin="0 20 10 0" Width="460" />
+                <TextBox x:Name="txtproductPrice" Style="{StaticResource LRTextBox}" Template="{StaticResource LRUserTextBox}" HorizontalAlignment="Right" Margin="0 20 10 0" Width="460" />
 
                 <TextBlock Style="{StaticResource LRTexBlock}" Text=": قیمت کالا با تخفیف" Margin="0 20 20 0" FontSize="23"/>
 
-                <TextBox Style="{StaticResource LRTextBox}" Template="{StaticResource LRUserTextBox}" HorizontalAlignment="Right" Margin="0 20 10 0" Width="460" />
+                <TextBox x:Name="txtProductDiscount" Style="{StaticResource LRTextBox}" Template="{StaticResource LRUserTextBox}" HorizontalAlignment="Right" Margin="0 20 10 0" Width="460" />
 
-                <TextBlock Style="{StaticResource LRTexBlock}" Text=": گروه کالا" Margin="0 20 20 0" FontSize="23"/>
+                <TextBlock Style="{StaticResource LRTexBlock}" Text=": گروه کالا" Margin="0 20 20 0" FontSize="23" Foreground="Red"/>
 
-                <TextBox Style="{StaticResource LRTextBox}" Template="{StaticResource LRUserTextBox}" HorizontalAlignment="Right" Margin="0 20 10 0" Width="460"/>
+                <TextBox x:Name="txtProductCatergory" Style="{StaticResource LRTextBox}" Template="{StaticResource LRUserTextBox}" HorizontalAlignment="Right" Margin="0 20 10 0" Width="460"/>
 
-                <Button Style="{StaticResource EditeButton}" Content="ذخیره تغیرات" Margin="25 30 0 0" HorizontalAlignment="Left" Background="#27503E" Foreground="White"/>
+                <Button x:Name="btnSubmit" Style="{StaticResource EditeButton}" Content="ذخیره تغیرات" Margin="25 30 0 0" HorizontalAlignment="Left" Background="#27503E" Foreground="White" Click="btnSubmit_Click"/>
             </StackPanel>
 
             <StackPanel>
 
                 <TextBlock Style="{StaticResource LRTexBlock}" Text=": توضیحات کالا" Margin="0 30 20 0" FontSize="23"/>
 
-                <TextBox Style="{StaticResource LRTextBox}" Template="{StaticResource LRUserTextBox}" TextWrapping="Wrap" AcceptsReturn="True" Margin="0 20 0 0" TextAlignment="Right" VerticalContentAlignment="Top" Height="478" Width="412" />
+                <TextBox x:Name="txtDescriptions" Style="{StaticResource LRTextBox}" Template="{StaticResource LRUserTextBox}" TextWrapping="Wrap" AcceptsReturn="True" Margin="0 20 0 0" TextAlignment="Right" VerticalContentAlignment="Top" Height="478" Width="412" />
 
-                <Button Style="{StaticResource EditeButton}" Content="انصراف از انجام عملیات" Margin="0 30 25 0" HorizontalAlignment="Right" Background="#602A2B" Foreground="White" FontSize="16"/>
+                <Button x:Name="btnCancel" Style="{StaticResource EditeButton}" Content="انصراف از انجام عملیات" Margin="0 30 25 0" HorizontalAlignment="Right" Background="#602A2B" Foreground="White" FontSize="16"/>
             </StackPanel>
 
         </Grid>

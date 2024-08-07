@@ -1,6 +1,7 @@
 ﻿using Accapt.Core.DTOs;
 using Accapt.Core.Servies.InterFace;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -101,6 +102,7 @@ namespace Accapt.Api.Controllers
 
         #region Update User
 
+        [Authorize]
         [HttpPatch("UPD(V1)/{userName}")]
         public async Task<IActionResult> UpdatedUser(string userName, [FromBody] JsonPatchDocument<UserUpdateDTO> patchDocument)
         {

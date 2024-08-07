@@ -1,4 +1,5 @@
-﻿using Accapt.Core.Servies.InterFace;
+﻿using Accapt.Core.DTOs;
+using Accapt.Core.Servies.InterFace;
 using Accapt.DataLayer.Context;
 using Accapt.DataLayer.Entities;
 using Microsoft.EntityFrameworkCore;

@@ -74,7 +74,8 @@ namespace Accapt.Api.Controllers
 
         #region UpdateProduct
 
-        [HttpPatch("UPP(V1)/{producId}")]
+        [Authorize]
+        [HttpPatch("UPP(V1)/{productId}")]
         public async Task<IActionResult> UpdateProduct(int productId, [FromBody] JsonPatchDocument<ProductUpdateDTO> patchDocument)
         {
             if (!ModelState.IsValid)
@@ -118,6 +119,25 @@ namespace Accapt.Api.Controllers
                 PageNumber = pageNumber,
                 PageSize = pageSize
             });
+        }
+
+        #endregion
+
+        #region GetSingleProduct
+
+        [Authorize]
+        [HttpGet("GSP(V1)/{productId}")]
+        public async Task<IActionResult> GetSingleProduct(int productId)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var product = await _findeProductServies.FindeProduct(productId);
+
+            if (product == null)
+                return NotFound();
+
+            return Ok(product);
         }
 
         #endregion

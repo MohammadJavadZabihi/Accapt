@@ -21,9 +21,6 @@ using System.Windows.Shapes;
 
 namespace Accapt.Views.Products
 {
-    /// <summary>
-    /// Interaction logic for ShowProductPage.xaml
-    /// </summary>
     public partial class ShowProductPage : Page
     {
         private readonly CallApi _calApiServies;
@@ -39,14 +36,14 @@ namespace Accapt.Views.Products
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadProducts(_currentPage);
+            await LoadProducts(_currentPage);
         }
 
         private async Task<bool> LoadProducts(int pageNumber)
         {
             try
             {
-                var responseMessgae = await _calApiServies.SendGetRequest<ShowProductDTO>($"https://localhost:7146/api/MangeProduct(V1)/GTAP(V1)?pageNumber={pageNumber}&pageSize={_pageSize}&filter={""}&userId={UserSession.Instance.UserId}",
+                var responseMessgae = await _calApiServies.SendGetRequest<ShowProductDTO>($"https://localhost:7146/api/MangeProduct(V1)/GTAP(V1)?pageNumber={pageNumber}&pageSize={_pageSize}&filter={txtSearch.Text}&userId={UserSession.Instance.UserId}",
                     data: null, jwt: UserSession.Instance.JwtToken);
 
                 if (responseMessgae.IsSuccess)
@@ -70,15 +67,6 @@ namespace Accapt.Views.Products
             }
         }
 
-        private async void PageButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button)
-            {
-                _currentPage = int.Parse(button.Content.ToString());
-                await LoadProducts(_currentPage);
-            }
-        }
-
         private async void btnNext_Click(object sender, RoutedEventArgs e)
         {
             _currentPage++;
@@ -86,16 +74,16 @@ namespace Accapt.Views.Products
             if (!statuce)
             {
                 _currentPage--;
-                LoadProducts(_currentPage);
+                await LoadProducts(_currentPage);
             }
         }
 
-        private void btnBefor_Click(object sender, RoutedEventArgs e)
+        private async void btnBefor_Click(object sender, RoutedEventArgs e)
         {
             _currentPage--;
             if (_currentPage > 0)
             {
-                LoadProducts(_currentPage);
+                await LoadProducts(_currentPage);
             }
             else
             {
@@ -103,9 +91,12 @@ namespace Accapt.Views.Products
             }
         }
 
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        private async void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-
+            if(!string.IsNullOrEmpty(txtSearch.Text))
+            {
+                await LoadProducts(_currentPage);
+            }
         }
 
         private async void btnDelet_Click(object sender, RoutedEventArgs e)
@@ -149,7 +140,7 @@ namespace Accapt.Views.Products
             }
         }
 
-        private void btnEdite_Click(object sender, RoutedEventArgs e)
+        private async void btnEdite_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -157,10 +148,25 @@ namespace Accapt.Views.Products
                 {
                     int productId = product.ProductId;
 
-                    if(productId != 0)
+                    var responseMessage = await _calApiServies.SendGetRequest<Product?>($"https://localhost:7146/api/MangeProduct(V1)/GSP(V1)/{productId}", jwt:UserSession.Instance.JwtToken);
+
+                    if(responseMessage.IsSuccess)
                     {
+                        var data = responseMessage.Data;
+
+                        if (data == null)
+                        {
+                            MessageBox.Show(responseMessage.Message,"خطا", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+
                         AddOrEditeProducts addOrEditeProducts = new AddOrEditeProducts();
+                        addOrEditeProducts.Product(productId, data);
                         addOrEditeProducts.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show(responseMessage.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
@@ -168,6 +174,17 @@ namespace Accapt.Views.Products
             {
                 MessageBox.Show($"Error Message : {ex.Message}", "خطا", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private async void RefreshPage_Click(object sender, RoutedEventArgs e)
+        {
+           await LoadProducts(_currentPage);
+        }
+
+        private void btnAddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            AddOrEditeProducts addOrEditeProducts = new AddOrEditeProducts();
+            addOrEditeProducts.ShowDialog();
         }
     }
 }
