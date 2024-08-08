@@ -22,5 +22,12 @@ namespace Accapt.DataLayer.Context
         public DbSet<ProductCatrgory> ProductCatrgories { get; set; }
 
         #endregion
+
+        #region Inovices Tabels
+
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceDetails> InvoiceDetails { get; set; }
+
+        #endregion
     }
 }

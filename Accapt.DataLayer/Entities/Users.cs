@@ -59,6 +59,8 @@ namespace Accapt.DataLayer.Entities
 
         [JsonIgnore]
         public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<Invoice> Invoices { get; set; }
+        public IEnumerable<InvoiceDetails> InvoiceDetails { get; set; }
 
         #endregion
     }

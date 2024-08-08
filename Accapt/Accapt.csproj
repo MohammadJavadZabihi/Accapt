@@ -57,4 +57,9 @@
     <Resource Include="ImageResurce\VSCode.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Invoices\ByeInvoices\" />
+    <Folder Include="Invoices\SalesInvoices\" />
+  </ItemGroup>
+
 </Project>
