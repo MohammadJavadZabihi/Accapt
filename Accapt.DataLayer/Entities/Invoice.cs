@@ -16,9 +16,6 @@ namespace Accapt.DataLayer.Entities
         }
 
         [Key]
-        public int InvId { get; set; }
-
-        [Required]
         public int InvoiceId { get; set; }
 
         [Required]
@@ -43,9 +40,6 @@ namespace Accapt.DataLayer.Entities
         public bool CreditorStatuce { get; set; }
 
         [Required]
-        public int TotalDiscount { get; set; }
-
-        [Required]
         public DateTime DateOfSubmitInvoice { get; set; }
 
         [MaxLength(800)]
@@ -55,6 +49,7 @@ namespace Accapt.DataLayer.Entities
         #region Realtion
 
         public Users Users { get; set; }
+        public IEnumerable<InvoiceDetails> InvoiceDetails { get; set; }
 
         #endregion
     }

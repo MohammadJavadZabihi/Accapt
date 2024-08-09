@@ -12,53 +12,56 @@ namespace Accapt.Core.Servies
 {
     public class AddInvoiceServies : IAddInvoiceServies
     {
-        private AccaptFContext _context;
+        private readonly AccaptFContext _context;
         public AddInvoiceServies(AccaptFContext context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentException(nameof(context));
         }
-
-        public async Task<Invoice?> AddInvoice(AddInvoicesDTO details)
+        public async Task<AddInvoicesDTO?> AddInvoice(AddInvoicesDTO invoice)
         {
             try
             {
-                if(details != null)
+                if(invoice == null) 
+                    throw new ArgumentNullException(nameof(invoice));
+
+                Invoice addInvoice = new Invoice()
                 {
-                    InvoiceDetails invDetails = new InvoiceDetails
-                    {
-                        Id = details.UserId,
-                        Discount = details.Discount,
-                        ProductCount = details.ProductCount,
-                        ProductName = details.ProductName,
-                        ProductPrice = details.ProductPrice,
-                        ProductTotalPrice = details.ProductTotalPrice
-                    };
+                    AmountPaid = invoice.AmountPaid,
+                    CreditorStatuce = invoice.CreditorStatuce,
+                    DateOfSubmitInvoice = invoice.DateOfSubmitInvoice,
+                    Description = invoice.Description,
+                    Id = invoice.UserId,
+                    InvoiceName = invoice.InvoiceName,
+                    TotalPrice = invoice.TotalPrice,
+                    TypeOfInvoice = invoice.TypeOfInvoice
+                };
 
-                    await _context.InvoiceDetails.AddAsync(invDetails);
-                    await _context.SaveChangesAsync();
+                await _context.Invoices.AddAsync(addInvoice);
+                await _context.SaveChangesAsync();
 
-                    Invoice invoice = new Invoice
-                    {
-                        AmountPaid = details.AmountPaid,
-                        DateOfSubmitInvoice = details.DateOfSubmitInvoice,
-                        Description = details.Description,
-                        Id = details.UserId,
-                        InvoiceId = details.InvoiceId,
-                        InvoiceName = details.InvoiceName,
-                        TotalDiscount = details.TotalDiscount,
-                        TotalPrice = details.TotalPrice,
-                        TypeOfInvoice = details.TypeOfInvoice,
-                        
-                    };
-                }
+                //var inv = await _context.Invoices.Fires
 
-                return null;
+                InvoiceDetails addinvoiceDetails = new InvoiceDetails()
+                {
+                    Discount = invoice.Discount,
+                    Id = invoice.UserId,
+                    ProductCount = invoice.ProductCount,
+                    ProductName = invoice.ProductName,
+                    ProductPrice = invoice.ProductPrice,
+                    ProductTotalPrice = invoice.ProductTotalPrice,
+                    InvoiceId = addInvoice.InvoiceId,
+                };
 
+                await _context.InvoiceDetails.AddAsync(addinvoiceDetails);
+                await _context.SaveChangesAsync();
+
+                return invoice;
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                throw new ArgumentNullException(nameof(ex.Message));
             }
+
         }
     }
 }

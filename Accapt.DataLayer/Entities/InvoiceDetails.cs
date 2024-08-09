@@ -16,6 +16,9 @@ namespace Accapt.DataLayer.Entities
         }
 
         [Key]
+        public int InvoiceDetailsId { get; set; }
+
+        [Required]
         public int InvoiceId { get; set; }
 
         [Required]
@@ -42,6 +45,7 @@ namespace Accapt.DataLayer.Entities
         #region Realation
 
         public Users Users { get; set; }
+        public Invoice Invoices { get; set; }
 
         #endregion
     }

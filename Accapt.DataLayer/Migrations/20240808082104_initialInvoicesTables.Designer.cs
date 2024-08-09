@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Accapt.DataLayer.Migrations
 {
     [DbContext(typeof(AccaptFContext))]
-    [Migration("20240801131054_editeProductTable")]
-    partial class editeProductTable
+    [Migration("20240808082104_initialInvoicesTables")]
+    partial class initialInvoicesTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,92 @@ namespace Accapt.DataLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Accapt.DataLayer.Entities.Invoice", b =>
+                {
+                    b.Property<int>("InvoiceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
+
+                    b.Property<decimal>("AmountPaid")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("CreditorStatuce")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("DateOfSubmitInvoice")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(800)
+                        .HasColumnType("nvarchar(800)");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("InvoiceName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TypeOfInvoice")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("InvoiceId");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("Invoices");
+                });
+
+            modelBuilder.Entity("Accapt.DataLayer.Entities.InvoiceDetails", b =>
+                {
+                    b.Property<int>("InvoiceDetailsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceDetailsId"));
+
+                    b.Property<int>("Discount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("ProductPrice")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ProductTotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("InvoiceDetailsId");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.ToTable("InvoiceDetails");
+                });
 
             modelBuilder.Entity("Accapt.DataLayer.Entities.Product", b =>
                 {
@@ -60,7 +146,7 @@ namespace Accapt.DataLayer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Product");
+                    b.ToTable("products");
                 });
 
             modelBuilder.Entity("Accapt.DataLayer.Entities.ProductCatrgory", b =>
@@ -83,7 +169,7 @@ namespace Accapt.DataLayer.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductCatrgory");
+                    b.ToTable("ProductCatrgories");
                 });
 
             modelBuilder.Entity("Accapt.DataLayer.Entities.Users", b =>
@@ -138,6 +224,34 @@ namespace Accapt.DataLayer.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Accapt.DataLayer.Entities.Invoice", b =>
+                {
+                    b.HasOne("Accapt.DataLayer.Entities.Users", "Users")
+                        .WithMany("Invoices")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Accapt.DataLayer.Entities.InvoiceDetails", b =>
+                {
+                    b.HasOne("Accapt.DataLayer.Entities.Users", "Users")
+                        .WithMany("InvoiceDetails")
+                        .HasForeignKey("Id");
+
+                    b.HasOne("Accapt.DataLayer.Entities.Invoice", "Invoices")
+                        .WithMany("InvoiceDetails")
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Invoices");
+
+                    b.Navigation("Users");
+                });
+
             modelBuilder.Entity("Accapt.DataLayer.Entities.Product", b =>
                 {
                     b.HasOne("Accapt.DataLayer.Entities.Users", "Users")
@@ -156,6 +270,11 @@ namespace Accapt.DataLayer.Migrations
                         .HasForeignKey("ProductId");
                 });
 
+            modelBuilder.Entity("Accapt.DataLayer.Entities.Invoice", b =>
+                {
+                    b.Navigation("InvoiceDetails");
+                });
+
             modelBuilder.Entity("Accapt.DataLayer.Entities.Product", b =>
                 {
                     b.Navigation("Category");
@@ -163,6 +282,10 @@ namespace Accapt.DataLayer.Migrations
 
             modelBuilder.Entity("Accapt.DataLayer.Entities.Users", b =>
                 {
+                    b.Navigation("InvoiceDetails");
+
+                    b.Navigation("Invoices");
+
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618

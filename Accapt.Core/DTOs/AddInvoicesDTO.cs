@@ -12,6 +12,9 @@ namespace Accapt.Core.DTOs
     {
         public string InvoiceName { get; set; } = string.Empty;
 
+        [Required]
+        public bool CreditorStatuce { get; set; }
+
         public string TypeOfInvoice { get; set; } = string.Empty;
 
         [Required]
@@ -43,9 +46,6 @@ namespace Accapt.Core.DTOs
 
         [Required]
         public DateTime DateOfSubmitInvoice { get; set; }
-
-        [Required]
-        public int InvoiceId { get; set; }
 
         [MaxLength(800)]
         public string Description { get; set; }
